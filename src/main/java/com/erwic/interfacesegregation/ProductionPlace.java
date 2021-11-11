@@ -11,9 +11,15 @@ public class ProductionPlace {
     private Human human = new Human("Paul");
     private Robot robot = new Robot("r1");
 
+    private Manageable managee;
+
     @PostConstruct
     public void init() {
-        productionManager.manageHuman(human);
-        productionManager.manageRobot(robot);
+        human.getManaged(productionManager);
+        robot.getManaged(productionManager);
+
+        // shows how managee can be managed by productionManager regardless of implementation
+        managee = robot;
+        managee.getManaged(productionManager);
     }
 }
